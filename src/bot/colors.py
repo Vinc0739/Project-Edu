@@ -1,3 +1,4 @@
+# print all possible colours
 def getColours():
     for style in range(8):
         for fg in range(30,38):
@@ -7,3 +8,4 @@ def getColours():
                 s1 += '\x1b[%sm %s \x1b[0m' % (format, format)
             print(s1)
         print('\n')
+getColours()
