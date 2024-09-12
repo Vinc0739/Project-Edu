@@ -1,6 +1,6 @@
 #imports
 from dotenv import dotenv_values
-from utils import getColours
+from bot.utils import getColours
 import discord
 from discord.ext import commands
 
@@ -14,7 +14,7 @@ bot = commands.Bot(command_prefix='.', intents=discord.Intents.all())
 @bot.event
 async def on_ready():
     print('logging in as ' + '\x1b[1;32;40m' + bot.user.name + '\x1b[0m')
-    await bot.change_presence(activity=discord.activity.Game(name='EduPage Studenplan'))
+    await bot.change_presence(activity=discord.activity.Game(name='EduPage'))
 
 
 #run the bot
