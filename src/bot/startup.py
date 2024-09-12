@@ -12,6 +12,7 @@ client = commands.Bot(command_prefix='.', intents=discord.Intents.all())
 
 # alle cog Extensions laden
 async def load_cogs():
+    print('\x1b[3;30;40m' + 'loading ' + '\x1b[0m' + '\x1b[1;33;40m' + 'cogs' + '\x1b[0m')
     for filename in os.listdir("./src/bot/cogs"):
         if filename.endswith(".py"):
             print('\x1b[3;30;40m' + 'started cog with name ' + '\x1b[0m' + '\x1b[1;34;40m' + filename + '\x1b[0m')
