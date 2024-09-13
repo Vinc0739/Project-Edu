@@ -23,6 +23,12 @@ class EduCommands(commands.Cog):
         await ctx.send(f'Der Bot hat gerade einen Ping von: **{user_ping}ms**')
         Prints.usedCommand(ctx.author.name, '/botping')
         
+    # /info
+    @commands.hybrid_command()
+    async def info(self, ctx):
+        await ctx.send(f'Informatik ist cool!')
+        Prints.usedCommand(ctx.author.name, '/info')
+        
     '''Dev Commands'''
     # /createlogin
     @commands.hybrid_command()
