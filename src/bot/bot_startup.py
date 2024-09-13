@@ -24,7 +24,7 @@ async def on_ready():
     print('\x1b[3;30;40m' + 'bot logged in as ' + '\x1b[0m' + '\x1b[1;35;40m' + client.user.name+ '\x1b[0m')
     await client.change_presence(activity=discord.activity.Game(name='Project Edu'))
     await client.tree.sync()
-
+    
 # Bot Start
 async def main():
     async with client:
