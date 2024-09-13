@@ -1,0 +1,1 @@
+import src.bot.bot_startup

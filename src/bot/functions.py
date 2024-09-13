@@ -1,6 +1,6 @@
 from edupage_api import Edupage
 from dotenv import dotenv_values
-from .api import getEdupage
+from ..api.api_handler import getEdupage
 
 edupage = getEdupage()
 

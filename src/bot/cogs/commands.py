@@ -1,10 +1,12 @@
 import discord
 from discord.ext import commands
 from dotenv import dotenv_values
-from .. import functions as api
+from ...api.api_handler import getUserData
 
 # Keys von der .env Datei bekommen
-env = dotenv_values(".env")
+env = dotenv_values('./src/configs/.env')
+
+user_sessions = {}
 
 class EduCommands(commands.Cog):
     def __init__(self, client):
@@ -21,15 +23,15 @@ class EduCommands(commands.Cog):
     @commands.hybrid_command()
     async def botping(self, ctx):
         user_ping = round(self.client.latency * 1000)
-        await ctx.send(f'Der Bot hat gerade einen Ping von: {user_ping}ms')
+        await ctx.send(f'Der Bot hat gerade einen Ping von: **{user_ping}ms**')
         usedCommand(ctx.author.name, '/botping')
     
-    # /schüleranzahl
-    @commands.hybrid_command()
-    async def schüleranzahl(self, ctx):
-        print('test')
-        await ctx.send(f'Es sind: {api.getStudentCount()} Schüler in EduPage eingetragen')
-        usedCommand(ctx.author.name, '/schüleranzahl')
+    # # /schüleranzahl
+    # @commands.hybrid_command()
+    # async def schüleranzahl(self, ctx):
+    #     print('test')
+    #     await ctx.send(f'Es sind: {api.getStudentCount()} Schüler in EduPage eingetragen')
+    #     usedCommand(ctx.author.name, '/schüleranzahl')
     
     # /createlogin
     @commands.hybrid_command()
@@ -47,6 +49,23 @@ class EduCommands(commands.Cog):
         await ctx.send(embed=loginEmbed)
         print('\x1b[1;33;41m' + 'New Login Created' + '\x1b[0m')
         usedCommand(ctx.author.name, '/createlogin')
+        
+    # /login
+    @commands.hybrid_command()
+    async def login(self, ctx):
+        #Edupage Daten bekommen
+        api_session_data = getUserData()
+        if api_session_data:
+            # neuen Kanal erstellen nur für den user
+            guild = ctx.guild
+            channel_user = self.client.get_user(ctx.author.id)
+            overwrites = {guild.default_role: discord.PermissionOverwrite(read_messages=False), guild.me: discord.PermissionOverwrite(read_messages=True), channel_user: discord.PermissionOverwrite(read_messages=True)}
+            channel = await guild.create_text_channel(name=f"{ctx.author.name}", overwrites=overwrites, category=self.client.get_channel(1283384196253089883))
+            await ctx.send(f'Login als {ctx.author.name} erfolgreich. Dein privater Kanal ist <#{channel.id}>')
+        else:
+            await ctx.send(f'Login als {ctx.author.name} fehlgeschlagen. Bitte versuche es erneut.')
+        userLogin(ctx.author.name)
+        usedCommand(ctx.author.name, '/login')
 
 # cog Setup
 async def setup(client):
@@ -55,3 +74,6 @@ async def setup(client):
 # Wird ausgefüht bei jedem Benutzen eines Command
 def usedCommand(user, command):
     print('\x1b[6;33;40m' + user + '\x1b[0m' + '\x1b[6;30;40m' + f' executed the command ' + '\x1b[0m' + '\x1b[6;33;40m' + command + '\x1b[0m')
+    
+def userLogin(user):
+    print('\x1b[7;30;42m' + user + '\x1b[0m' + '\x1b[6;30;40m' + f' login successful')
