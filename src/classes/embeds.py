@@ -9,55 +9,68 @@ error_embed_colour = "0xa71818"
 class Embeds:
     # Control Panel Embed
     def getControlPanelEmbed():
-        control_panel_embed = discord.Embed()
-        control_panel_embed.title='Project Edu - Control Panel'
-        control_panel_embed.color=discord.Colour.from_str(default_embed_colour)
-        control_panel_embed.set_footer(text='Project Edu made by Vinc#0739')
-        control_panel_embed.add_field(name='📑 Login', value='Drücke auf den Login Button und fülle das Formular mit deinen EduPage Kontodaten aus. Solltest du falsche Daten eingeben, kann du sie jederzeit in deinem eigenen Kanal ändern.')
-        control_panel_embed.add_field(name='📕 Auslogen', value='Um dich aus zu loggen musst du auf den roten Auslogen Button drücken. Jegliche Daten von dir werden gelöscht. Bedenke, dass auch dein Kanal, sowie Nachrichten und Dateien gelöscht werden.')
-        return control_panel_embed
+        embed = discord.Embed()
+        embed.title='Project Edu - Control Panel'
+        embed.color=discord.Colour.from_str(default_embed_colour)
+        embed.set_footer(text='Project Edu made by Vinc#0739')
+        embed.add_field(name='📑 Login', value='Drücke auf den Login Button und fülle das Formular mit deinen EduPage Kontodaten aus. Solltest du falsche Daten eingeben, kann du sie jederzeit in deinem eigenen Kanal ändern.')
+        embed.add_field(name='📕 Auslogen', value='Um dich aus zu loggen musst du auf den roten Auslogen Button drücken. Jegliche Daten von dir werden gelöscht. Bedenke, dass auch dein Kanal, sowie Nachrichten und Dateien gelöscht werden.')
+        return embed
     
     # Login Embed
     def getLoginEmbed(channel_id):
-        login_embed = discord.Embed()
-        login_embed.title='Project Edu - Login'
-        login_embed.description=f'Du hast dich erfolgreich eingelogt. Du findest deinen persönlichen Kanal unter <#{channel_id}>.'
-        login_embed.color=discord.Colour.from_str(success_embed_colour)
-        login_embed.set_footer(text='Project Edu made by Vinc#0739')
-        return login_embed
+        embed = discord.Embed()
+        embed.title='Project Edu - Login'
+        embed.description=f'Du hast dich erfolgreich eingelogt. Du findest deinen persönlichen Kanal unter <#{channel_id}>.'
+        embed.color=discord.Colour.from_str(success_embed_colour)
+        embed.set_footer(text='Project Edu made by Vinc#0739')
+        return embed
+    
     # Login Error Embed
     def getLoginErrorEmbed(error):
-        login_error_embed = discord.Embed()
-        login_error_embed.title='Project Edu - Login Error'
-        login_error_embed.description=f'Login fehlgeschlagen. Versuche es bitte später erneut. ERROR: {error}'
-        login_error_embed.color=discord.Colour.from_str(error_embed_colour)
-        login_error_embed.set_footer(text='Project Edu made by Vinc#0739')
-        return login_error_embed
+        embed = discord.Embed()
+        embed.title='Project Edu - Login Error'
+        embed.description=f'Login fehlgeschlagen. Versuche es bitte später erneut. ERROR: {error}'
+        embed.color=discord.Colour.from_str(error_embed_colour)
+        embed.set_footer(text='Project Edu made by Vinc#0739')
+        return embed
     
+    # schon eingelogt Embed
     def getAlreadyLogedInEmbed():
-        login_error_embed = discord.Embed()
-        login_error_embed.title='Project Edu - Bereits eingeloged'
-        login_error_embed.description=f'Der Login ist fehlgeschlagen, weil du bereits eingelogt bist.'
-        login_error_embed.color=discord.Colour.from_str(error_embed_colour)
-        login_error_embed.set_footer(text='Project Edu made by Vinc#0739')
-        return login_error_embed
+        embed = discord.Embed()
+        embed.title='Project Edu - Bereits eingeloged'
+        embed.description=f'Der Login ist fehlgeschlagen, weil du bereits eingelogt bist.'
+        embed.color=discord.Colour.from_str(error_embed_colour)
+        embed.set_footer(text='Project Edu made by Vinc#0739')
+        return embed
     
     # Channel Crated
     def getChannelCreatedEmbed(username, password):
-        channel_created_embed = discord.Embed()
-        channel_created_embed.title='Project Edu - Kanal erstellt'
-        channel_created_embed.description='Dein Kanal wurde erfolgreich erstellt. Du kann hier nun alle Funktionen des Bots benutzen.'
-        channel_created_embed.color=discord.Colour.from_str(default_embed_colour)
-        channel_created_embed.set_footer(text='Project Edu made by Vinc#0739')
-        channel_created_embed.add_field(name='Benutzername', value=f'||{username}||')
-        channel_created_embed.add_field(name='Passwort', value=f'||{password}||')
-        return channel_created_embed
+        embed = discord.Embed()
+        embed.title='Project Edu - Kanal erstellt'
+        embed.description='Dein Kanal wurde erfolgreich erstellt. Du kann hier nun alle Funktionen des Bots benutzen.'
+        embed.color=discord.Colour.from_str(success_embed_colour)
+        embed.set_footer(text='Project Edu made by Vinc#0739')
+        embed.add_field(name='Benutzername', value=f'||{username}||')
+        embed.add_field(name='Passwort', value=f'||{password}||')
+        return embed
     
     # Logout Embed
     def getLogoutEmbed():
-        logout_embed = discord.Embed()
-        logout_embed.title='Project Edu - Logout'
-        logout_embed.description='Du hast dich erfolgreich ausgelogt.'
-        logout_embed.color=discord.Colour.from_str(default_embed_colour)
-        logout_embed.set_footer(text='Project Edu made by Vinc#0739')
-        return logout_embed
+        embed = discord.Embed()
+        embed.title='Project Edu - Logout'
+        embed.description='Du hast dich erfolgreich ausgelogt.'
+        embed.color=discord.Colour.from_str(success_embed_colour)
+        embed.set_footer(text='Project Edu made by Vinc#0739')
+        return embed
+    
+    # Neuer User joint dem Server
+    def getJoinedServer(member):
+        embed = discord.Embed()
+        embed.title='Project Edu - Willkommen'
+        embed.description=f'**Hey {member.mention}, willkommen bei Project Edu!**'
+        embed.color=discord.Colour.from_str(default_embed_colour)
+        embed.set_footer(text='Project Edu made by Vinc#0739')
+        embed.add_field(name='📌 Anleitung', value='Schaue dir den Kanal <#1281634184367968389> an. Dort findest du eine detaillierte Anleitung, wie du dich beim Bot einloggen kannst, um alle Funktionen nutzen zu können. Befolge alle Schritte genau so wie beschrieben, um Fehler zu vermeiden.')
+        embed.add_field(name='🔨 Fortschritt', value='Besuche den Kanal <#1283381827528032327>, um den aktuellen Fortschritt des Projektes zu verfolgen. Hier erhältst du die neuesten Updates und Informationen über Bugfixes und neue Features.')
+        return embed
