@@ -3,7 +3,6 @@ from discord.ext import commands
 from .embeds import Embeds
 from .prints import Prints
 from .modals import LoginModal
-from ..api.api_handler import getUserData
 
 class ControlPanelView(discord.ui.View):
     

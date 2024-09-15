@@ -3,7 +3,7 @@ from discord.ext import commands
 from dotenv import dotenv_values
 
 # Keys von der .env Datei bekommen
-env = dotenv_values(".env")
+env = dotenv_values('./src/bot/.env')
 
 class Welcome(commands.Cog):
     def __init__(self, client):

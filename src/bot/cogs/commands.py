@@ -1,13 +1,13 @@
 import discord
 from discord.ext import commands
 from ...api.api_handler import getUserData
-from ...configs.views import ControlPanelView
-from ...configs.embeds import Embeds
-from ...configs.prints import Prints
+from ...classes.views import ControlPanelView
+from ...classes.embeds import Embeds
+from ...classes.prints import Prints
 from dotenv import dotenv_values
 
 # Keys von der .env Datei bekommen
-env = dotenv_values('./src/configs/.env')
+env = dotenv_values('./src/bot/.env')
 
 user_sessions = {}
 

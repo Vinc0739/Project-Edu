@@ -5,7 +5,7 @@ from dotenv import dotenv_values
 from discord.ext import commands
 
 # Keys von der .env Datei bekommen
-env = dotenv_values('./src/configs/.env')
+env = dotenv_values('./src/bot/.env')
 
 # Bot erstellen
 client = commands.Bot(command_prefix='.', intents=discord.Intents.all())
