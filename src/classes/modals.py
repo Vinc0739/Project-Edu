@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from .database import Database
 from .embeds import Embeds
 from .prints import Prints
 
@@ -20,15 +21,23 @@ class LoginModal(discord.ui.Modal, title='Gib bitte deine EduPage Benutzerdaten 
     
     # Bei Absenden
     async def on_submit(self, interaction: discord.Interaction):
-        # neuen Kanal erstellen nur für den user
-        guild = interaction.guild
-        overwrites = {guild.default_role: discord.PermissionOverwrite(read_messages=False), guild.me: discord.PermissionOverwrite(read_messages=True), interaction.user: discord.PermissionOverwrite(read_messages=True)}
-        channel = await guild.create_text_channel(name=f"🟣︱{interaction.user.name}", overwrites=overwrites, category=await guild.fetch_channel(1283384196253089883))
-        await channel.send(embed=Embeds.getChannelCreatedEmbed(self.username.value, self.password.value))
+        # in db speichern
+        db = Database()
+        user = db.getUserFromDiscordId(interaction.user.id)
+        if user == []:
+            db.createNewUser(interaction.user.name, interaction.user.id, self.username.value, self.password.value)
+            
+            # neuen Kanal erstellen nur für den user
+            guild = interaction.guild
+            overwrites = {guild.default_role: discord.PermissionOverwrite(read_messages=False), guild.me: discord.PermissionOverwrite(read_messages=True), interaction.user: discord.PermissionOverwrite(read_messages=True)}
+            channel = await guild.create_text_channel(name=f"🟣︱{interaction.user.name}", overwrites=overwrites, category=await guild.fetch_channel(1283384196253089883))
+            await channel.send(embed=Embeds.getChannelCreatedEmbed(self.username.value, self.password.value))
         
-        await interaction.response.send_message(ephemeral=True, embed=Embeds.getLoginEmbed(channel.id))
-        Prints.userLogin(interaction.user.name)
+            await interaction.response.send_message(ephemeral=True, embed=Embeds.getLoginEmbed(channel.id))
+            Prints.userLogin(interaction.user.name)
+        else:
+            await interaction.response.send_message(ephemeral=True, embed=Embeds.getAlreadyLogedInEmbed())
         
     # Bei Error
-    async def on_error(self, interaction: discord.Interaction):
-        await interaction.response.send_message(ephemeral=True, embed=Embeds.getLoginErrorEmbed())
+    async def on_error(self, interaction: discord.Interaction, error):
+        await interaction.response.send_message(ephemeral=True, embed=Embeds.getLoginErrorEmbed(error))

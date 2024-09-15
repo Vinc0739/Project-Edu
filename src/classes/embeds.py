@@ -26,10 +26,18 @@ class Embeds:
         login_embed.set_footer(text='Project Edu made by Vinc#0739')
         return login_embed
     # Login Error Embed
-    def getLoginErrorEmbed(channel_id):
+    def getLoginErrorEmbed(error):
         login_error_embed = discord.Embed()
-        login_error_embed.title='Project Edu - Login'
-        login_error_embed.description='Login fehlgeschlagen. Versuche es bitte später erneut.'
+        login_error_embed.title='Project Edu - Login Error'
+        login_error_embed.description=f'Login fehlgeschlagen. Versuche es bitte später erneut. ERROR: {error}'
+        login_error_embed.color=discord.Colour.from_str(error_embed_colour)
+        login_error_embed.set_footer(text='Project Edu made by Vinc#0739')
+        return login_error_embed
+    
+    def getAlreadyLogedInEmbed():
+        login_error_embed = discord.Embed()
+        login_error_embed.title='Project Edu - Bereits eingeloged'
+        login_error_embed.description=f'Der Login ist fehlgeschlagen, weil du bereits eingelogt bist.'
         login_error_embed.color=discord.Colour.from_str(error_embed_colour)
         login_error_embed.set_footer(text='Project Edu made by Vinc#0739')
         return login_error_embed
