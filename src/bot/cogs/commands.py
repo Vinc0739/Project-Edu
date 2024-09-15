@@ -14,13 +14,13 @@ class EduCommands(commands.Cog):
     async def botping(self, ctx):
         user_ping = round(self.client.latency * 1000)
         await ctx.send(f'Der Bot hat gerade einen Ping von: **{user_ping}ms**')
-        Prints.usedCommand(ctx.author.name, '/botping')
+        Prints.usedCommand(ctx.author.name, ctx.author.id, '/botping')
         
     # /info
     @commands.hybrid_command()
     async def info(self, ctx):
         await ctx.send(f'Informatik ist cool!')
-        Prints.usedCommand(ctx.author.name, '/info')
+        Prints.usedCommand(ctx.author.name, ctx.author.id, '/info')
         
     '''Dev Commands'''
     # /createlogin
@@ -29,13 +29,13 @@ class EduCommands(commands.Cog):
         embed = Embeds.getControlPanelEmbed()
         view = ControlPanelView()
         await ctx.send(embed=embed, view=view)
-        Prints.usedDevCommand(ctx.author.name, '/createlogin')
+        Prints.usedDevCommand(ctx.author.name, ctx.author.id, '/createlogin')
         
     # /reaload -> Kann länge dauern
     @commands.hybrid_command()
     async def reaload(self, ctx):
         await self.client.tree.sync()
-        Prints.usedDevCommand(ctx.author.name, '/reaload')
+        Prints.usedDevCommand(ctx.author.name, ctx.author.id, '/reaload')
 
 # cog Setup
 async def setup(client):

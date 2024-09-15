@@ -34,10 +34,12 @@ class LoginModal(discord.ui.Modal, title='Gib bitte deine EduPage Benutzerdaten 
             await channel.send(embed=Embeds.getChannelCreatedEmbed(self.username.value, self.password.value))
         
             await interaction.response.send_message(ephemeral=True, embed=Embeds.getLoginEmbed(channel.id))
-            Prints.userLogin(interaction.user.name)
+            Prints.userLogin(interaction.user.name, interaction.user.id)
         else:
             await interaction.response.send_message(ephemeral=True, embed=Embeds.getAlreadyLogedInEmbed())
+            Prints.alreadyLogedIn(interaction.user.name, interaction.user.id)
         
     # Bei Error
     async def on_error(self, interaction: discord.Interaction, error):
         await interaction.response.send_message(ephemeral=True, embed=Embeds.getLoginErrorEmbed(error))
+        Prints.loginError(interaction.user.name, interaction.user.id, error)

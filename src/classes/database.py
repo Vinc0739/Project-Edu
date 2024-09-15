@@ -14,7 +14,7 @@ class Database:
         
     # neuen User in db erstellen
     def createNewUser(self, discordName, discordId, username, password):
-        Prints.insertedInDB(discordName, discordId)
+        Prints.createdUser(discordName, discordId)
         
         self.__db.insert('users', {'discordName': discordName, 'discordId': discordId, 'username': username, 'password': password})
         

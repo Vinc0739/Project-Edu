@@ -17,5 +17,5 @@ class ControlPanelView(discord.ui.View):
     @discord.ui.button(label='Logout', style=discord.ButtonStyle.red)
     async def logout(self, interaction: discord.Interaction, button: discord.ui.Button):
         await interaction.response.send_message(ephemeral=True, embed=Embeds.getLogoutEmbed())
-        Prints.userLogout(interaction.user.name)
+        Prints.userLogout(interaction.user.name, interaction.user.id)
         
