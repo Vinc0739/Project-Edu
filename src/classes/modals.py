@@ -1,8 +1,8 @@
 import discord
-from discord.ext import commands
+from ..bot.config import Config
 from .database import Database
 from .embeds import Embeds
-from .prints import Prints
+from .logs import Logs, DiscordLogs
 
 class LoginModal(discord.ui.Modal, title='Gib bitte deine EduPage Benutzerdaten ein'):
     username = discord.ui.TextInput(
@@ -34,12 +34,19 @@ class LoginModal(discord.ui.Modal, title='Gib bitte deine EduPage Benutzerdaten 
             db.createNewUser(interaction.user.name, interaction.user.id, self.username.value, self.password.value, channel.id)
             # Embed Antwort
             await interaction.response.send_message(ephemeral=True, embed=Embeds.getLoginEmbed(channel.id))
-            Prints.userLogin(interaction.user.name, interaction.user.id)
+            # Logs
+            await DiscordLogs.userLogin(interaction.guild.get_channel(Config.logs_channel), interaction.user.id) # Discord
+            Logs.userLogin(interaction.user.name, interaction.user.id) # Terminal
         else:
             await interaction.response.send_message(ephemeral=True, embed=Embeds.getAlreadyLogedInEmbed())
-            Prints.alreadyLogedIn(interaction.user.name, interaction.user.id)
+            # Logs
+            await DiscordLogs.alreadyLogedIn(interaction.guild.get_channel(Config.logs_channel), interaction.user.id) # Discord
+            Logs.alreadyLogedIn(interaction.user.name, interaction.user.id) # Terminal
         
     # Bei Error
     async def on_error(self, interaction: discord.Interaction, error):
-        await interaction.response.send_message(ephemeral=True, embed=Embeds.getLoginErrorEmbed(error))
-        Prints.loginError(interaction.user.name, interaction.user.id, error)
+        await interaction.response.send_message(ephemeral=True, embed=Embeds.getLoginErrorEmbed())
+        Logs.loginError(interaction.user.name, interaction.user.id, error)
+        # Logs
+        await DiscordLogs.loginError(interaction.guild.get_channel(Config.logs_channel), interaction.user.id, error) # Discord
+        Logs.loginError(interaction.user.name, interaction.user.id, error) # Terminal

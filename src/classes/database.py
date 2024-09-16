@@ -1,5 +1,5 @@
 from  sqlite4  import  SQLite4 as sql
-from .prints import Prints
+from .logs import Logs
 
 class Database:
     
@@ -14,9 +14,15 @@ class Database:
         
     # neuen User in db erstellen
     def createNewUser(self, discordName, discordId, username, password, userChannel):
-        Prints.createdUser(discordName, discordId)
-        
         self.__db.insert('users', {'discordName': discordName, 'discordId': discordId, 'username': username, 'password': password, 'userChannel': userChannel})
+        # Logs nur Terminal
+        Logs.createdUser(discordName, discordId)
+    
+    # User aus Db löschen
+    def deleteUser(self, discordId, discordName):
+        self.__db.delete("users", f"discordId = {discordId}")
+        # Logs nur Terminal
+        Logs.deletedUser(discordId, discordName)
         
     # User mit discordId bekommen
     def getUser(self, discordId):
@@ -26,8 +32,3 @@ class Database:
             return None 
         else:
             return user[0]
-    
-    def deleteUser(self, discordId, discordName):
-        self.__db.delete("users", f"discordId = {discordId}")
-        
-        Prints.deletedUser(discordId, discordName)

@@ -1,8 +1,9 @@
 import discord
 from discord.ext import commands
+from ..bot.config import Config
 from .database import Database
 from .embeds import Embeds
-from .prints import Prints
+from .logs import Logs, DiscordLogs
 from .modals import LoginModal
 
 class ControlPanelView(discord.ui.View):
@@ -20,10 +21,11 @@ class ControlPanelView(discord.ui.View):
         # User von Db bekommen
         db = Database()
         user = db.getUser(interaction.user.id)
-        print(user)
         if user == [] or user == None:
             await interaction.response.send_message(ephemeral=True, embed=Embeds.getNotLogedIdEmbed())
-            Prints.userNotLogedIn(interaction.user.name, interaction.user.id)
+            # Logs
+            await DiscordLogs.userNotLogedIn(interaction.guild.get_channel(Config.logs_channel), interaction.user.id) # Discord
+            Logs.userNotLogedIn(interaction.user.name, interaction.user.id) # Terminal
         else:
             user_channel_id = user[4]
             # user von db löschen
@@ -33,5 +35,7 @@ class ControlPanelView(discord.ui.View):
             await user_channel.delete()
             # Antworten
             await interaction.response.send_message(ephemeral=True, embed=Embeds.getLogoutEmbed())
-            Prints.userLogout(interaction.user.name, interaction.user.id)
+            # Logs
+            await DiscordLogs.userLogout(interaction.guild.get_channel(Config.logs_channel), interaction.user.id) # Discord
+            Logs.userLogout(interaction.user.name, interaction.user.id) # Terminal
         

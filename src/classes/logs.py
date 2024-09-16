@@ -1,11 +1,14 @@
 from datetime import datetime
+import discord
+from .embeds import LogEmbeds
+from ..bot.config import Config
 
-class Prints:
+class Logs:
     
     """Starting Prints"""
     
     # Bot startet
-    def botStarting():
+    async def botStarting(logging_channel):
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
         print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[1;32;40m' + ' bot starting' + '\x1b[0m')
@@ -69,7 +72,7 @@ class Prints:
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
         print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;37;41m' + f'already logged in: "{user_name}" ({user_id})' + '\x1b[0m')  
         
-    # User schon Eingelogt  
+    # User nicht Eingelogt  
     def userNotLogedIn(user_name, user_id):
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
@@ -96,3 +99,49 @@ class Prints:
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
         print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[0;33;40m' + f' "{user_name}" ({user_id}) joined the Server' + '\x1b[0m')  
+
+# -------------------------- Discord Logs -----------------------------------------------------------------------------------------------------------------------      
+# 
+class DiscordLogs:
+    
+    """Starting Logs"""
+    
+    # Bot Startet
+    async def botStarting(channel):
+        await channel.send(embed=LogEmbeds.getLogsEmbed('Der Bot wurde gestartet.', Config.bot_start_log_colour))
+        
+    """Commands Logs"""    
+        
+    # User benutzt Command
+    async def usedCommand(channel, user_id, command_name):
+        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat den Command "**{command_name}**" verwendet.', Config.command_log_colour))
+        
+    # User benutzt Dev Command
+    async def usedDevCommand(channel, user_id, command_name):
+        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat den Dev Command "**{command_name}**" verwendet.', Config.dev_command_log_colour))
+        
+    """Control Panel"""    
+        
+    # User Login
+    async def userLogin(channel, user_id):
+        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat sich eingelogt', Config.login_log_colour))
+        
+    # User Logout
+    async def userLogout(channel, user_id):
+        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat sich ausngelogt', Config.logout_log_colour))
+        
+    # Login Error
+    async def loginError(channel, user_id, error):
+        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Fehler beim Login von **<@{user_id}>**. Error: {error}', Config.error_log_colour))
+        
+    # Logout Error
+    async def logoutError(channel, user_id, error):
+        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Fehler beim Logout von **<@{user_id}>**. Error: {error}', Config.error_log_colour))
+        
+    # User schon Eingelogt  
+    async def alreadyLogedIn(channel, user_id):
+        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat versucht sich einzuloggen, er ist jedoch schon eingelogt ', Config.error_light_log_colour))
+        
+    # User nicht Eingelogt  
+    async def userNotLogedIn(channel, user_id,):
+        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat versucht sich auszuloggen, er ist jedoch nicht eingelogt ', Config.error_light_log_colour))
