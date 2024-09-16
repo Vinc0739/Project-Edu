@@ -67,7 +67,13 @@ class Prints:
     def alreadyLogedIn(user_name, user_id):
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;37;41m' + f'already logged in: "{user_name}" ({user_id})' + '\x1b[0m')      
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;37;41m' + f'already logged in: "{user_name}" ({user_id})' + '\x1b[0m')  
+        
+    # User schon Eingelogt  
+    def userNotLogedIn(user_name, user_id):
+        now = datetime.now()
+        formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;37;41m' + f'user not logged in: "{user_name}" ({user_id})' + '\x1b[0m')      
         
     """Database Prints"""
         
@@ -75,7 +81,13 @@ class Prints:
     def createdUser(user_name, user_id):
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[0;34;40m' + f' created new user for "{user_name}" ({user_id})' + '\x1b[0m')       
+        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[0;34;40m' + f' created new user for "{user_name}" ({user_id})' + '\x1b[0m')  
+        
+    # User von DB gelöscht 
+    def deletedUser(user_id, user_name):
+        now = datetime.now()
+        formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
+        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[0;34;40m' + f' deleted user for "{user_name}" ({user_id})' + '\x1b[0m')       
         
     """Welcome Prints"""
     

@@ -29,7 +29,7 @@ class Embeds:
     # Login Error Embed
     def getLoginErrorEmbed(error):
         embed = discord.Embed()
-        embed.title='Project Edu - Login Error'
+        embed.title='Project Edu - Login Fehler'
         embed.description=f'Login fehlgeschlagen. Versuche es bitte später erneut. ERROR: {error}'
         embed.color=discord.Colour.from_str(error_embed_colour)
         embed.set_footer(text='Project Edu made by Vinc#0739')
@@ -38,8 +38,8 @@ class Embeds:
     # schon eingelogt Embed
     def getAlreadyLogedInEmbed():
         embed = discord.Embed()
-        embed.title='Project Edu - Bereits eingeloged'
-        embed.description=f'Der Login ist fehlgeschlagen, weil du bereits eingelogt bist.'
+        embed.title='Project Edu - Login Fehler'
+        embed.description=f'Du bereits eingelogt bist.'
         embed.color=discord.Colour.from_str(error_embed_colour)
         embed.set_footer(text='Project Edu made by Vinc#0739')
         return embed
@@ -73,4 +73,13 @@ class Embeds:
         embed.set_footer(text='Project Edu made by Vinc#0739')
         embed.add_field(name='📌 Anleitung', value='Schaue dir den Kanal <#1281634184367968389> an. Dort findest du eine detaillierte Anleitung, wie du dich beim Bot einloggen kannst, um alle Funktionen nutzen zu können. Befolge alle Schritte genau so wie beschrieben, um Fehler zu vermeiden.')
         embed.add_field(name='🔨 Fortschritt', value='Besuche den Kanal <#1283381827528032327>, um den aktuellen Fortschritt des Projektes zu verfolgen. Hier erhältst du die neuesten Updates und Informationen über Bugfixes und neue Features.')
+        return embed
+    
+    # schon eingelogt Embed
+    def getNotLogedIdEmbed():
+        embed = discord.Embed()
+        embed.title='Project Edu - Logout Fehler'
+        embed.description=f'Du bist nicht eingelogt.'
+        embed.color=discord.Colour.from_str(error_embed_colour)
+        embed.set_footer(text='Project Edu made by Vinc#0739')
         return embed
