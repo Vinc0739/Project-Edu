@@ -24,7 +24,7 @@ class ControlPanelView(discord.ui.View):
         if user == [] or user == None:
             await interaction.response.send_message(ephemeral=True, embed=Embeds.getNotLogedIdEmbed())
             # Logs
-            await DiscordLogs.userNotLogedIn(interaction.guild.get_channel(Config.logs_channel), interaction.user.id) # Discord
+            await DiscordLogs.userNotLogedIn(interaction.guild.get_channel(Config.control_panel_logs_channel), interaction.user.id) # Discord
             Logs.userNotLogedIn(interaction.user.name, interaction.user.id) # Terminal
         else:
             user_channel_id = user[4]
@@ -36,6 +36,6 @@ class ControlPanelView(discord.ui.View):
             # Antworten
             await interaction.response.send_message(ephemeral=True, embed=Embeds.getLogoutEmbed())
             # Logs
-            await DiscordLogs.userLogout(interaction.guild.get_channel(Config.logs_channel), interaction.user.id) # Discord
+            await DiscordLogs.userLogout(interaction.guild.get_channel(Config.control_panel_logs_channel), interaction.user.id) # Discord
             Logs.userLogout(interaction.user.name, interaction.user.id) # Terminal
         

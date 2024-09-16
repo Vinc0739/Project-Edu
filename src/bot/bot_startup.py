@@ -5,6 +5,9 @@ from discord.ext import commands
 from dotenv import dotenv_values
 from .config import Config
 from ..classes.logs import Logs, DiscordLogs
+from ..classes.embeds import Embeds
+from ..classes.views import ControlPanelView
+from ..classes.functions import Functions
 
 # Keys von der .env Datei bekommen
 env = dotenv_values('./src/bot/.env')
@@ -26,12 +29,19 @@ async def on_ready():
     # Bot Status ändern
     await client.change_presence(activity=discord.activity.Game(name='Project Edu'))
     
-    # Logs
-    await DiscordLogs.botStarting(client.get_channel(Config.logs_channel)) # Discord
+    # Bot Start Log
+    await DiscordLogs.botStarting(client.get_channel(Config.system_logs_channel)) # Discord
     Logs.botLoggedIn(client.user.name) # Terminal
+    
+    # Control Panel senden
+    await Functions.sendControlPanelEmbed(client.get_channel(Config.control_panel_channel))
+    await DiscordLogs.newControlPanel(client.get_channel(Config.control_panel_logs_channel)) # Discord
+    Logs.newControlPanel() # Terminal
     
     # Command Tree syncen
     await client.tree.sync()
+    await DiscordLogs.syncedCommands(client.get_channel(Config.system_logs_channel))
+    Logs.syncedCommands()
     
 # Bot Start
 async def main():

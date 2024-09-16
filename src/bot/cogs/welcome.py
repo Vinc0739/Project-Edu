@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 from ..config import Config
 from ...classes.embeds import Embeds
-from ...classes.logs import Logs
+from ...classes.logs import Logs, DiscordLogs
 
 class Welcome(commands.Cog):
     def __init__(self, client):
@@ -15,12 +15,12 @@ class Welcome(commands.Cog):
         if channel is not None:
             # Embed Senden
             await channel.send(embed=Embeds.getJoinedServer(member))
-            
             # Rollen geben    
             roles = [discord.utils.get(member.guild.roles, name=role_name) for role_name in Config.join_roles]
             await member.add_roles(*roles)
-            
-            Logs.joinedServer(member.name, member.id)
+            # Logs
+            await DiscordLogs.usedCommand(self.client.get_channel(Config.joins_logs_channel), member.id) # Discord
+            Logs.joinedServer(member.name, member.id, '/info') # Terminal
 
 # cog Setup
 async def setup(client):

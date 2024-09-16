@@ -35,12 +35,12 @@ class LoginModal(discord.ui.Modal, title='Gib bitte deine EduPage Benutzerdaten 
             # Embed Antwort
             await interaction.response.send_message(ephemeral=True, embed=Embeds.getLoginEmbed(channel.id))
             # Logs
-            await DiscordLogs.userLogin(interaction.guild.get_channel(Config.logs_channel), interaction.user.id) # Discord
+            await DiscordLogs.userLogin(interaction.guild.get_channel(Config.control_panel_logs_channel), interaction.user.id) # Discord
             Logs.userLogin(interaction.user.name, interaction.user.id) # Terminal
         else:
             await interaction.response.send_message(ephemeral=True, embed=Embeds.getAlreadyLogedInEmbed())
             # Logs
-            await DiscordLogs.alreadyLogedIn(interaction.guild.get_channel(Config.logs_channel), interaction.user.id) # Discord
+            await DiscordLogs.alreadyLogedIn(interaction.guild.get_channel(Config.control_panel_logs_channel), interaction.user.id) # Discord
             Logs.alreadyLogedIn(interaction.user.name, interaction.user.id) # Terminal
         
     # Bei Error
@@ -48,5 +48,5 @@ class LoginModal(discord.ui.Modal, title='Gib bitte deine EduPage Benutzerdaten 
         await interaction.response.send_message(ephemeral=True, embed=Embeds.getLoginErrorEmbed())
         Logs.loginError(interaction.user.name, interaction.user.id, error)
         # Logs
-        await DiscordLogs.loginError(interaction.guild.get_channel(Config.logs_channel), interaction.user.id, error) # Discord
+        await DiscordLogs.loginError(interaction.guild.get_channel(Config.control_panel_logs_channel), interaction.user.id, error) # Discord
         Logs.loginError(interaction.user.name, interaction.user.id, error) # Terminal

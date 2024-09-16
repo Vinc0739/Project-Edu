@@ -25,6 +25,12 @@ class Logs:
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
         print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[1;32;40m' + f' bot logged in as: "{bot_name}"' + '\x1b[0m')
         print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[1;37;40m' + ' -------------------------------------------' + '\x1b[0m')
+        
+    # Bot eingelogt in Discord
+    def syncedCommands():
+        now = datetime.now()
+        formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
+        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[5;32;40m' + f' synced command tree' + '\x1b[0m')
 
     """Commands Prints"""
         
@@ -41,6 +47,12 @@ class Logs:
         print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[0;35;40m' + f' "{user_name}" ({user_id}) used dev command: {command_name}' + '\x1b[0m')    
         
     """Control Panel Prints"""
+        
+    # Neues Control Panel erstellt
+    def newControlPanel():
+        now = datetime.now()
+        formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
+        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[7;33;40m' + ' new control panel created' + '\x1b[0m')  
         
     # User logt sich ein
     def userLogin(user_name, user_id):
@@ -98,7 +110,7 @@ class Logs:
     def joinedServer(user_name, user_id):
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[0;33;40m' + f' "{user_name}" ({user_id}) joined the Server' + '\x1b[0m')  
+        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[0;33;40m' + f' "{user_name}" ({user_id}) joined the Server' + '\x1b[0m') 
 
 # -------------------------- Discord Logs -----------------------------------------------------------------------------------------------------------------------      
 # 
@@ -128,7 +140,7 @@ class DiscordLogs:
         
     # User Logout
     async def userLogout(channel, user_id):
-        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat sich ausngelogt', Config.logout_log_colour))
+        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat sich ausgelogt', Config.logout_log_colour))
         
     # Login Error
     async def loginError(channel, user_id, error):
@@ -140,8 +152,20 @@ class DiscordLogs:
         
     # User schon Eingelogt  
     async def alreadyLogedIn(channel, user_id):
-        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat versucht sich einzuloggen, er ist jedoch schon eingelogt ', Config.error_light_log_colour))
+        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat versucht sich einzuloggen, er ist jedoch schon eingelogt', Config.error_light_log_colour))
         
     # User nicht Eingelogt  
     async def userNotLogedIn(channel, user_id,):
-        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat versucht sich auszuloggen, er ist jedoch nicht eingelogt ', Config.error_light_log_colour))
+        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat versucht sich auszuloggen, er ist jedoch nicht eingelogt', Config.error_light_log_colour))
+        
+    # Neues Control Panel erstellt   
+    async def newControlPanel(channel):
+        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Neues Control Panel erstellt', Config.control_panel_log_colour))
+
+    # Neuer User joint Server
+    async def joinedServer(channel, user_id):
+        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User <@{user_id}> ist dem Server beigetreten', Config.default_log_colour))
+        
+    # Command Tree gesynced
+    async def syncedCommands(channel):
+        await channel.send(embed=LogEmbeds.getLogsEmbed('Der Command Tree wurde gesynced', Config.commands_synced_log_colour))
