@@ -80,6 +80,15 @@ class Embeds:
         embed.set_footer(text='Project Edu made by Vinc#0739')
         return embed
     
+    # Control Panel erstellt
+    def getControlPanelCreated():
+        embed = discord.Embed()
+        embed.title='Project Edu - Control Panel'
+        embed.description=f'Das Control Panel wurde neu gesendet.'
+        embed.color=discord.Colour.from_str('0x' + f'{Config.success_embed_colour}')
+        embed.set_footer(text='Project Edu made by Vinc#0739')
+        return embed
+    
 class LogEmbeds:
     def getLogsEmbed(description, color):
         

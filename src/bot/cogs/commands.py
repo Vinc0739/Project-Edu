@@ -3,6 +3,7 @@ from discord.ext import commands
 from ..config import Config
 from ...classes.logs import Logs, DiscordLogs
 from ...classes.functions import Functions
+from ...classes.embeds import Embeds
 
 class EduCommands(commands.Cog):
     def __init__(self, client):
@@ -26,14 +27,22 @@ class EduCommands(commands.Cog):
         await DiscordLogs.usedCommand(self.client.get_channel(Config.commands_logs_channel), ctx.author.id, '/info' ) # Discord
         Logs.usedCommand(ctx.author.name, ctx.author.id, '/info') # Terminal
         
-    '''Dev Commands'''
-    # /createlogin
+    # /projectedu
     @commands.hybrid_command()
-    async def createlogin(self, ctx):
-        # await Functions.sendControlPanelEmbed(self.client.get_channel(Config.control_panel_channel))
+    async def projectedu(self, ctx):
+        await ctx.send(f'...')
+        # Logs
+        await DiscordLogs.usedCommand(self.client.get_channel(Config.commands_logs_channel), ctx.author.id, '/projectedu' ) # Discord
+        Logs.usedCommand(ctx.author.name, ctx.author.id, '/projectedu') # Terminal
+        
+    '''Dev Commands'''
+    # /createcontrolpanel
+    @commands.hybrid_command()
+    async def createcontrolpanel(self, ctx):
+        await Functions.sendControlPanelEmbed(self.client.get_channel(Config.control_panel_channel))
         # Commands Logs
-        await DiscordLogs.usedDevCommand(self.client.get_channel(Config.commands_logs_channel), ctx.author.id, '/createlogin' ) # Discord
-        Logs.usedDevCommand(ctx.author.name, ctx.author.id, '/createlogin') # Terminal
+        await DiscordLogs.usedDevCommand(self.client.get_channel(Config.commands_logs_channel), ctx.author.id, '/createcontrolpanel' ) # Discord
+        Logs.usedDevCommand(ctx.author.name, ctx.author.id, '/createcontrolpanel') # Terminal
         # Control Panel Logs
         await DiscordLogs.newControlPanel(self.client.get_channel(Config.control_panel_logs_channel)) # Discord
         Logs.newControlPanel() # Terminal

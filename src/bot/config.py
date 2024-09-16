@@ -8,6 +8,9 @@ class Config:
     # Intents
     bot_intents = discord.Intents.all()
     
+    # Guild
+    guild_id = 1281633939919863828
+    
     
     """Farben"""
     
