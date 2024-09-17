@@ -36,16 +36,16 @@ class EduCommands(commands.Cog):
         Logs.usedCommand(ctx.author.name, ctx.author.id, '/projectedu') # Terminal
         
     '''Dev Commands'''
-    # /createcontrolpanel
+    # /createuserpanel
     @commands.hybrid_command()
-    async def createcontrolpanel(self, ctx):
-        await Functions.sendControlPanelEmbed(self.client.get_channel(Config.control_panel_channel))
+    async def createuserpanel(self, ctx):
+        await Functions.sendUserPanelEmbed(self.client.get_channel(Config.user_panel_channel))
         # Commands Logs
-        await DiscordLogs.usedDevCommand(self.client.get_channel(Config.commands_logs_channel), ctx.author.id, '/createcontrolpanel' ) # Discord
-        Logs.usedDevCommand(ctx.author.name, ctx.author.id, '/createcontrolpanel') # Terminal
-        # Control Panel Logs
-        await DiscordLogs.newControlPanel(self.client.get_channel(Config.control_panel_logs_channel)) # Discord
-        Logs.newControlPanel() # Terminal
+        await DiscordLogs.usedDevCommand(self.client.get_channel(Config.commands_logs_channel), ctx.author.id, '/createuserpanel' ) # Discord
+        Logs.usedDevCommand(ctx.author.name, ctx.author.id, '/createuserpanel') # Terminal
+        # User Panel Logs
+        await DiscordLogs.newUserPanel(self.client.get_channel(Config.user_panel_logs_channel)) # Discord
+        Logs.newUserPanel() # Terminal
         
     # /reaload -> Kann länge dauern
     @commands.hybrid_command()

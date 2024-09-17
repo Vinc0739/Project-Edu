@@ -1,12 +1,11 @@
 import discord
-from discord.ext import commands
 from ..bot.config import Config
-from .database import Database
+from ..db.database import Database
 from .embeds import Embeds
 from .logs import Logs, DiscordLogs
 from .modals import LoginModal
 
-class ControlPanelView(discord.ui.View):
+class UserPanelView(discord.ui.View):
     
     # Login Button
     @discord.ui.button(label='Login', style=discord.ButtonStyle.green)
@@ -24,7 +23,7 @@ class ControlPanelView(discord.ui.View):
         if user == [] or user == None:
             await interaction.response.send_message(ephemeral=True, embed=Embeds.getNotLogedIdEmbed())
             # Logs
-            await DiscordLogs.userNotLogedIn(interaction.guild.get_channel(Config.control_panel_logs_channel), interaction.user.id) # Discord
+            await DiscordLogs.userNotLogedIn(interaction.guild.get_channel(Config.user_panel_logs_channel), interaction.user.id) # Discord
             Logs.userNotLogedIn(interaction.user.name, interaction.user.id) # Terminal
         else:
             user_channel_id = user[4]
@@ -36,6 +35,6 @@ class ControlPanelView(discord.ui.View):
             # Antworten
             await interaction.response.send_message(ephemeral=True, embed=Embeds.getLogoutEmbed())
             # Logs
-            await DiscordLogs.userLogout(interaction.guild.get_channel(Config.control_panel_logs_channel), interaction.user.id) # Discord
+            await DiscordLogs.userLogout(interaction.guild.get_channel(Config.user_panel_logs_channel), interaction.user.id) # Discord
             Logs.userLogout(interaction.user.name, interaction.user.id) # Terminal
         

@@ -1,5 +1,4 @@
 from datetime import datetime
-import discord
 from .embeds import LogEmbeds
 from ..bot.config import Config
 
@@ -46,13 +45,13 @@ class Logs:
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
         print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[0;35;40m' + f' "{user_name}" ({user_id}) used dev command: {command_name}' + '\x1b[0m')    
         
-    """Control Panel Prints"""
+    """User Panel Prints"""
         
-    # Neues Control Panel erstellt
-    def newControlPanel():
+    # Neues User Panel erstellt
+    def newUserPanel():
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[7;33;40m' + ' new control panel created' + '\x1b[0m')  
+        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[7;33;40m' + ' new User panel created' + '\x1b[0m')  
         
     # User logt sich ein
     def userLogin(user_name, user_id):
@@ -132,7 +131,7 @@ class DiscordLogs:
     async def usedDevCommand(channel, user_id, command_name):
         await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat den Dev Command "**{command_name}**" verwendet.', Config.dev_command_log_colour))
         
-    """Control Panel"""    
+    """User Panel"""    
         
     # User Login
     async def userLogin(channel, user_id):
@@ -158,9 +157,9 @@ class DiscordLogs:
     async def userNotLogedIn(channel, user_id,):
         await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat versucht sich auszuloggen, er ist jedoch nicht eingelogt', Config.error_light_log_colour))
         
-    # Neues Control Panel erstellt   
-    async def newControlPanel(channel):
-        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Neues Control Panel erstellt', Config.control_panel_log_colour))
+    # Neues User Panel erstellt   
+    async def newUserPanel(channel):
+        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Neues User Panel erstellt', Config.user_panel_log_colour))
 
     # Neuer User joint Server
     async def joinedServer(channel, user_id):

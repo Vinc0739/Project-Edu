@@ -1,18 +1,16 @@
 from .embeds import Embeds
-from .views import ControlPanelView
-from ..bot.config import Config
-from .logs import Logs, DiscordLogs
+from .views import UserPanelView
 
 class Functions:
-    async def sendControlPanelEmbed(channel): 
+    async def sendUserPanelEmbed(channel): 
         try:
             message = await channel.fetch_message(channel.last_message_id)
         except:
-            embed = Embeds.getControlPanelEmbed()
-            view = ControlPanelView()
+            embed = Embeds.getUserPanelEmbed()
+            view = UserPanelView()
             await channel.send(embed=embed, view=view)
             return
         await message.delete()
-        embed = Embeds.getControlPanelEmbed()
-        view = ControlPanelView()
+        embed = Embeds.getUserPanelEmbed()
+        view = UserPanelView()
         await channel.send(embed=embed, view=view)

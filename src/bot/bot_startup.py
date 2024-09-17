@@ -5,8 +5,6 @@ from discord.ext import commands
 from dotenv import dotenv_values
 from .config import Config
 from ..classes.logs import Logs, DiscordLogs
-from ..classes.embeds import Embeds
-from ..classes.views import ControlPanelView
 from ..classes.functions import Functions
 
 # Keys von der .env Datei bekommen
@@ -33,10 +31,10 @@ async def on_ready():
     await DiscordLogs.botStarting(client.get_channel(Config.system_logs_channel)) # Discord
     Logs.botLoggedIn(client.user.name) # Terminal
     
-    # Control Panel senden
-    await Functions.sendControlPanelEmbed(client.get_channel(Config.control_panel_channel))
-    await DiscordLogs.newControlPanel(client.get_channel(Config.control_panel_logs_channel)) # Discord
-    Logs.newControlPanel() # Terminal
+    # User Panel senden
+    await Functions.sendUserPanelEmbed(client.get_channel(Config.user_panel_channel))
+    await DiscordLogs.newUserPanel(client.get_channel(Config.user_panel_logs_channel)) # Discord
+    Logs.newUserPanel() # Terminal
     
     # Command Tree syncen
     await client.tree.sync()

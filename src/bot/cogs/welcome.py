@@ -19,7 +19,7 @@ class Welcome(commands.Cog):
             roles = [discord.utils.get(member.guild.roles, name=role_name) for role_name in Config.join_roles]
             await member.add_roles(*roles)
             # Logs
-            await DiscordLogs.usedCommand(self.client.get_channel(Config.joins_logs_channel), member.id) # Discord
+            await DiscordLogs.joinedServer(self.client.get_channel(Config.joins_logs_channel), member.id) # Discord
             Logs.joinedServer(member.name, member.id, '/info') # Terminal
 
 # cog Setup
