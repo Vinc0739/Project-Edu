@@ -54,6 +54,19 @@ class EduCommands(commands.Cog):
         # Logs
         await DiscordLogs.usedDevCommand(self.client.get_channel(Config.commands_logs_channel), ctx.author.id, '/reaload' ) # Discord
         Logs.usedDevCommand(ctx.author.name, ctx.author.id, '/reaload') # Terminal
+        
+    # /stopbot -> Stop den Bot
+    @commands.hybrid_command()
+    async def stopbot(self, ctx):
+        await ctx.send('Der Bot wurde erfolgreich gestopt.')
+        # Commands Logs
+        await DiscordLogs.usedDevCommand(self.client.get_channel(Config.commands_logs_channel), ctx.author.id, '/stopbot' ) # Discord
+        Logs.usedDevCommand(ctx.author.name, ctx.author.id, '/stopbot') # Terminal
+        # Bot Stop Logs
+        await DiscordLogs.botStopped(self.client.get_channel(Config.system_logs_channel), ctx.author.id) # Discord
+        Logs.botStopped() # Terminal
+        # Stop Bot
+        exit()
 
 # cog Setup
 async def setup(client):

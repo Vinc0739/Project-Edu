@@ -7,10 +7,16 @@ class Logs:
     """Starting Prints"""
     
     # Bot startet
-    async def botStarting(logging_channel):
+    async def botStarting():
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
         print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[1;32;40m' + ' bot starting' + '\x1b[0m')
+        
+    # Bot gestopt
+    async def botStopped():
+        now = datetime.now()
+        formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
+        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[1;31;40m' + ' bot stopped' + '\x1b[0m')
     
     # Cog laden
     def loadingCog(cog_name):
@@ -168,3 +174,7 @@ class DiscordLogs:
     # Command Tree gesynced
     async def syncedCommands(channel):
         await channel.send(embed=LogEmbeds.getLogsEmbed('Der Command Tree wurde gesynced', Config.commands_synced_log_colour))
+        
+    # Command Tree gesynced
+    async def botStopped(channel, user_id):
+        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User <@{user_id}> hat den Bot gestopt', Config.error_log_colour))
