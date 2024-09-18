@@ -51,7 +51,7 @@ class Logs:
     def newUserPanel():
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[7;33;40m' + ' new User panel created' + '\x1b[0m')  
+        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[7;33;40m' + ' new user panel created' + '\x1b[0m')  
         
     # User logt sich ein
     def userLogin(user_name, user_id):
@@ -109,7 +109,27 @@ class Logs:
     def joinedServer(user_name, user_id):
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[0;33;40m' + f' "{user_name}" ({user_id}) joined the Server' + '\x1b[0m') 
+        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[0;33;40m' + f' "{user_name}" ({user_id}) joined the Server' + '\x1b[0m')
+            
+    """Control Panel Prints"""
+    
+    # Control Panel erstellt
+    def newControlPanel():
+        now = datetime.now()
+        formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
+        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[0;30;46m' + ' new control panel created' + '\x1b[0m')  
+        
+    # Control Panel Bot gestartet
+    def controlPanelBotStart():
+        now = datetime.now()
+        formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
+        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[0;36;40m' + ' startet bot from control panel' + '\x1b[0m') 
+        
+    # Control Panel Bot gestopt
+    def controlPanelBotStopped():
+        now = datetime.now()
+        formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
+        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[0;36;40m' + ' stopped bot from control panel' + '\x1b[0m') 
 
 # -------------------------- Discord Logs -----------------------------------------------------------------------------------------------------------------------      
 # 
@@ -164,6 +184,8 @@ class DiscordLogs:
     # Neuer User joint Server
     async def joinedServer(channel, user_id):
         await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User <@{user_id}> ist dem Server beigetreten', Config.default_log_colour))
+        
+    """Command Tree"""   
         
     # Command Tree gesynced
     async def syncedCommands(channel):
