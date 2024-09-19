@@ -4,10 +4,9 @@ def start_bot():
     import discord
     from discord.ext import commands
     from dotenv import dotenv_values
-    from .config import Config
+    from .bot_config import Config
     from ..classes.logs import Logs, DiscordLogs
     from ..classes.functions import Functions
-    import customtkinter as ck
 
     # Keys von der .env Datei bekommen
     env = dotenv_values('./src/bot/.env')

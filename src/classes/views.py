@@ -1,5 +1,5 @@
 import discord
-from ..bot.config import Config
+from ..bot.bot_config import Config
 from ..db.database import Database
 from .embeds import Embeds
 from .logs import Logs, DiscordLogs

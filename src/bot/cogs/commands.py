@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from ..config import Config
+from ..bot_config import Config
 from ...classes.logs import Logs, DiscordLogs
 from ...classes.functions import Functions
 from ...classes.embeds import Embeds
