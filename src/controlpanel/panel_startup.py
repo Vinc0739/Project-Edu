@@ -35,7 +35,7 @@ def start_control_panel():
             self.sidebar_button_2 = ck.CTkButton(self.sidebar_frame, text='Stop Bot', command=self.stopBot)
             self.sidebar_button_2.grid(row=2, column=0, pady=10)
             
-            self.sidebar_button_3 = ck.CTkButton(self.sidebar_frame, text='Restart Bot', command=self.restartBot) # nicht implementiert
+            self.sidebar_button_3 = ck.CTkButton(self.sidebar_frame, text='Restart Bot', command=self.restartBot)
             self.sidebar_button_3.grid(row=3, column=0, pady=10)
             
             # Label h2 (Erscheinungsmodus)
@@ -59,7 +59,6 @@ def start_control_panel():
         
         #
         def changeAppearanceMode(self, choice):
-            print(1)
             if choice == 'System':
                 newMode = 'system'
             elif choice == 'Hell':
