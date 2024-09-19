@@ -15,7 +15,7 @@ def start_control_panel():
             self.geometry("1280x720")
             self.grid_columnconfigure(1, weight=1)
             self.grid_rowconfigure(1, weight=1)
-
+            self.iconbitmap('././docs/branding/icon.ico')
 
             """Side Bar"""
             
