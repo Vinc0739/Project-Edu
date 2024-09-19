@@ -10,32 +10,32 @@ class Logs:
     async def botStarting():
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[1;32;40m' + ' bot starting' + '\x1b[0m')
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[1;32;40m' + 'bot starting' + '\x1b[0m')
         
     # Bot gestopt
     async def botStopped():
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[1;31;40m' + ' bot stopped' + '\x1b[0m')
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[1;31;40m' + 'bot stopped' + '\x1b[0m')
     
     # Cog laden
     def loadingCog(cog_name):
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[0;32;40m' + f' cog loaded: "{cog_name}"' + '\x1b[0m')
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;32;40m' + f'cog loaded: "{cog_name}"' + '\x1b[0m')
         
     # Bot eingelogt in Discord
     def botLoggedIn(bot_name):
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[1;32;40m' + f' bot logged in as: "{bot_name}"' + '\x1b[0m')
-        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[1;37;40m' + ' -------------------------------------------' + '\x1b[0m')
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[1;32;40m' + 'bot logged in as: "{bot_name}"' + '\x1b[0m')
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[1;37;40m' + '-------------------------------------------' + '\x1b[0m')
         
     # Bot eingelogt in Discord
     def syncedCommands():
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[5;32;40m' + f' synced command tree' + '\x1b[0m')
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[5;32;40m' + 'synced command tree' + '\x1b[0m')
 
     """Commands Prints"""
         
@@ -43,13 +43,13 @@ class Logs:
     def usedCommand(user_name, user_id, command_name):
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[0;37;40m' + f' "{user_name}" ({user_id}) used command: {command_name}' + '\x1b[0m')     
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;37;40m' + f'"{user_name}" ({user_id}) used command: {command_name}' + '\x1b[0m')     
         
     # User benutzt Dev Command
     def usedDevCommand(user_name, user_id, command_name):
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[0;35;40m' + f' "{user_name}" ({user_id}) used dev command: {command_name}' + '\x1b[0m')    
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;35;40m' + f'"{user_name}" ({user_id}) used dev command: {command_name}' + '\x1b[0m')    
         
     """User Panel Prints"""
         
@@ -57,19 +57,19 @@ class Logs:
     def newUserPanel():
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[7;33;40m' + ' new User panel created' + '\x1b[0m')  
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[7;33;40m' + 'new User panel created' + '\x1b[0m')  
         
     # User logt sich ein
     def userLogin(user_name, user_id):
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[0;32;40m' + f' "{user_name}" ({user_id}) logged in' + '\x1b[0m')     
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;32;40m' + f'"{user_name}" ({user_id}) logged in' + '\x1b[0m')     
         
     # User logt sich aus
     def userLogout(user_name, user_id):
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + formatted_time + '\x1b[0m' + '\x1b[0;31;40m' + f' "{user_name}" ({user_id}) logged out' + '\x1b[0m')       
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;31;40m' + f'"{user_name}" ({user_id}) logged out' + '\x1b[0m')       
         
     # Login Error
     def loginError(user_name, user_id, error):

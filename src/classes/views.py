@@ -10,9 +10,18 @@ class UserPanelView(discord.ui.View):
     # Login Button
     @discord.ui.button(label='Login', style=discord.ButtonStyle.green)
     async def login(self, interaction: discord.Interaction, button: discord.ui.Button):
-        #Modal (Formular) laden
-        modal = LoginModal()
-        await interaction.response.send_modal(modal)
+        # User von Db bekommen und überprüfen ob er noch nicht eigetragen ist
+        db = Database()
+        user = db.getUser(interaction.user.id)
+        if user == [] or user == None:
+            # Formular senden
+            modal = LoginModal()
+            await interaction.response.send_modal(modal)
+        else:
+            await interaction.response.send_message(ephemeral=True, embed=Embeds.getAlreadyLogedInEmbed())
+            # Logs
+            await DiscordLogs.alreadyLogedIn(interaction.guild.get_channel(Config.user_panel_logs_channel), interaction.user.id) # Discord
+            Logs.alreadyLogedIn(interaction.user.name, interaction.user.id) # Terminal
         
     # Logout Button
     @discord.ui.button(label='Logout', style=discord.ButtonStyle.red)
