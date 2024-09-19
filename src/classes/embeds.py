@@ -1,6 +1,6 @@
 import discord
 from datetime import datetime
-from ..bot.config import Config
+from ..bot.bot_config import Config
 
 class Embeds:
     # User Panel Embed
