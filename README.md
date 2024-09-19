@@ -20,6 +20,7 @@
 - **edupage_api**: Version 0.11.0
 - **python-dotenv**: Version 1.0.1
 - **SQLite4**: Version 0.1.1
+- **customtkinter**: Version 5.2.2
 
 ## Zeitraum
 
