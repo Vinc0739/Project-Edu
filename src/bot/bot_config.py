@@ -29,6 +29,7 @@ class Config:
     logout_log_colour = '932800'
     command_log_colour = 'd9c4ff'
     dev_command_log_colour = '5712d5'
+    api_command_log_colour = 'c72eff'
     success_log_colour = '18a76c'
     error_log_colour = 'a71818'
     error_light_log_colour = 'cf8282'
@@ -54,3 +55,4 @@ class Config:
     """Rollen"""
     
     join_roles = ['↣ | Mitglied', '-- Team Roles --', '-- Custom Roles --', '-- User Roles--', '-- Permission Roles --']
+    user_role = '↣ | Benutzer'

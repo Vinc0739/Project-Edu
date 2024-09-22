@@ -41,14 +41,12 @@ class Embeds:
         return embed
     
     # Channel Crated
-    def getChannelCreatedEmbed(username, password):
+    def getChannelCreatedEmbed():
         embed = discord.Embed()
         embed.title='Project Edu - Kanal erstellt'
         embed.description='Dein Kanal wurde erfolgreich erstellt. Du kann hier nun alle Funktionen des Bots benutzen.'
         embed.color=discord.Colour.from_str('0x' + f'{Config.success_embed_colour}')
         embed.set_footer(text='Project Edu made by Vinc#0739', icon_url=Config.logo_url)
-        embed.add_field(name='Benutzername', value=f'||{username}||')
-        embed.add_field(name='Passwort', value=f'||{password}||')
         return embed
     
     # Logout Embed

@@ -25,10 +25,14 @@ class LoginModal(discord.ui.Modal, title='Gib bitte deine EduPage Benutzerdaten 
         guild = interaction.guild
         overwrites = {guild.default_role: discord.PermissionOverwrite(read_messages=False), guild.me: discord.PermissionOverwrite(read_messages=True), interaction.user: discord.PermissionOverwrite(read_messages=True)}
         channel = await guild.create_text_channel(name=f"🟣︱{interaction.user.name}", overwrites=overwrites, category=await guild.fetch_channel(1283384196253089883))
-        await channel.send(embed=Embeds.getChannelCreatedEmbed(self.username.value, self.password.value))
+        await channel.send(embed=Embeds.getChannelCreatedEmbed())
         # neuen User in Db anlegen
         db = Database()
         db.createNewUser(interaction.user.name, interaction.user.id, self.username.value, self.password.value, channel.id)
+        # Benutzer Rolle geben
+        member = guild.get_member(interaction.user.id)
+        roles = [discord.utils.get(guild.roles, name=Config.user_role)]
+        await member.add_roles(*roles)
         # Embed Antwort
         await interaction.response.send_message(ephemeral=True, embed=Embeds.getLoginEmbed(channel.id))
         # Logs

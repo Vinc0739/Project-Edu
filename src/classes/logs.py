@@ -28,7 +28,7 @@ class Logs:
     def botLoggedIn(bot_name):
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[1;32;40m' + 'bot logged in as: "{bot_name}"' + '\x1b[0m')
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[1;32;40m' + f'bot logged in as: "{bot_name}"' + '\x1b[0m')
         print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[1;37;40m' + '-------------------------------------------' + '\x1b[0m')
         
     # Bot eingelogt in Discord
@@ -44,12 +44,18 @@ class Logs:
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
         print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;37;40m' + f'"{user_name}" ({user_id}) used command: {command_name}' + '\x1b[0m')     
-        
+    
     # User benutzt Dev Command
     def usedDevCommand(user_name, user_id, command_name):
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;35;40m' + f'"{user_name}" ({user_id}) used dev command: {command_name}' + '\x1b[0m')    
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;35;40m' + f'"{user_name}" ({user_id}) used dev command: {command_name}' + '\x1b[0m')  
+    
+    # User benutzt Api Command
+    def usedApiCommand(user_name, user_id, command_name):
+        now = datetime.now()
+        formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[3;35;40m' + f'"{user_name}" ({user_id}) used api command: {command_name}' + '\x1b[0m')   
         
     """User Panel Prints"""
         
@@ -172,8 +178,12 @@ class DiscordLogs:
         await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat den Command "**{command_name}**" verwendet.', Config.command_log_colour))
         
     # User benutzt Dev Command
-    async def usedDevCommand(channel, user_id, command_name):
+    async def usedApiCommand(channel, user_id, command_name):
         await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat den Dev Command "**{command_name}**" verwendet.', Config.dev_command_log_colour))
+        
+    # User benutzt Api Command
+    async def usedApiCommand(channel, user_id, command_name):
+        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat den Api Command "**{command_name}**" verwendet.', Config.api_command_log_colour))
         
     """User Panel"""    
         

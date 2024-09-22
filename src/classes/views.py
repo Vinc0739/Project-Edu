@@ -41,6 +41,11 @@ class UserPanelView(discord.ui.View):
             # Channel des Users löschen
             user_channel = interaction.guild.get_channel(user_channel_id)
             await user_channel.delete()
+            # Benutzer Rolle entfernen
+            guild = interaction.guild
+            member = guild.get_member(interaction.user.id)
+            roles = [discord.utils.get(guild.roles, name=Config.user_role)]
+            await member.remove_roles(*roles)
             # Antworten
             await interaction.response.send_message(ephemeral=True, embed=Embeds.getLogoutEmbed())
             # Logs
