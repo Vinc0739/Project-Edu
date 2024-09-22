@@ -1,3 +1,4 @@
+import base64
 import discord
 from ..bot.bot_config import Config
 from ..db.database import Database
@@ -26,9 +27,14 @@ class LoginModal(discord.ui.Modal, title='Gib bitte deine EduPage Benutzerdaten 
         overwrites = {guild.default_role: discord.PermissionOverwrite(read_messages=False), guild.me: discord.PermissionOverwrite(read_messages=True), interaction.user: discord.PermissionOverwrite(read_messages=True)}
         channel = await guild.create_text_channel(name=f"🟣︱{interaction.user.name}", overwrites=overwrites, category=await guild.fetch_channel(1283384196253089883))
         await channel.send(embed=Embeds.getChannelCreatedEmbed())
+        # Codieren von Passwort und Username
+        byte_username = self.username.value.encode('utf-8')
+        byte_password = self.password.value.encode('utf-8')
+        encodes_username = base64.b64encode(byte_username)
+        encodes_password = base64.b64encode(byte_password)
         # neuen User in Db anlegen
         db = Database()
-        db.createNewUser(interaction.user.name, interaction.user.id, self.username.value, self.password.value, channel.id)
+        db.createNewUser(interaction.user.name, interaction.user.id, encodes_username, encodes_password, channel.id)
         # Benutzer Rolle geben
         member = guild.get_member(interaction.user.id)
         roles = [discord.utils.get(guild.roles, name=Config.user_role)]
