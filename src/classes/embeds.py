@@ -87,6 +87,23 @@ class Embeds:
         embed.set_footer(text='Project Edu made by Vinc#0739', icon_url=Config.logo_url)
         return embed
     
+    # Falsche Login Daten
+    def getWrongLoginData():
+        embed = discord.Embed()
+        embed.title='Project Edu - Update Daten Fehler'
+        embed.description=f'Die Login Daten, die du dem Bot geschickt hast, sind nicht in EduPage hinterlegt. Verwende den Command **/nutzerdaten** um deine Daten zu ändern.'
+        embed.color=discord.Colour.from_str('0x' + f'{Config.error_embed_colour}')
+        embed.set_footer(text='Project Edu made by Vinc#0739', icon_url=Config.logo_url)
+        return embed
+    
+    def getUpdatedDataEmbed():
+        embed = discord.Embed()
+        embed.title='Project Edu - Update Data'
+        embed.description=f'Du hast deine Nutzerdaten erfolgreich geändert.'
+        embed.color=discord.Colour.from_str('0x' + f'{Config.success_embed_colour}')
+        embed.set_footer(text='Project Edu made by Vinc#0739', icon_url=Config.logo_url)
+        return embed
+    
 class LogEmbeds:
     def getLogsEmbed(description, color):
         

@@ -30,7 +30,10 @@ class Functions:
         decoded_password = byte_password.decode('utf-8')
         
         user_edu = getUserData(decoded_username, decoded_password)
-        return user_edu
+        if user_edu == None:
+            return None
+        else:
+            return user_edu
     
     # User Api Kanal bekommen
     def getUserChannel(user_id):

@@ -10,5 +10,5 @@ def getUserData(username, password):
     try:
         edupage.login(username, password, env['SCHOOL_SUBDOMAIN'])
     except:
-        return Exception('LOGIN_ERROR: wrong username/password')
+        return None
     return edupage

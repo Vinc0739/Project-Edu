@@ -30,11 +30,11 @@ class LoginModal(discord.ui.Modal, title='Gib bitte deine EduPage Benutzerdaten 
         # Codieren von Passwort und Username
         byte_username = self.username.value.encode('utf-8')
         byte_password = self.password.value.encode('utf-8')
-        encodes_username = base64.b64encode(byte_username)
-        encodes_password = base64.b64encode(byte_password)
+        encoded_username = base64.b64encode(byte_username)
+        encoded_password = base64.b64encode(byte_password)
         # neuen User in Db anlegen
         db = Database()
-        db.createNewUser(interaction.user.name, interaction.user.id, encodes_username, encodes_password, channel.id)
+        db.createNewUser(interaction.user.name, interaction.user.id, encoded_username, encoded_password, channel.id)
         # Benutzer Rolle geben
         member = guild.get_member(interaction.user.id)
         roles = [discord.utils.get(guild.roles, name=Config.user_role)]
@@ -48,7 +48,45 @@ class LoginModal(discord.ui.Modal, title='Gib bitte deine EduPage Benutzerdaten 
     # Bei Error
     async def on_error(self, interaction: discord.Interaction, error):
         await interaction.response.send_message(ephemeral=True, embed=Embeds.getLoginErrorEmbed())
-        Logs.loginError(interaction.user.name, interaction.user.id, error)
         # Logs
         await DiscordLogs.loginError(interaction.guild.get_channel(Config.user_panel_logs_channel), interaction.user.id, error) # Discord
         Logs.loginError(interaction.user.name, interaction.user.id, error) # Terminal
+
+
+class UpdateDataModal(discord.ui.Modal, title='Gib bitte deine EduPage Benutzerdaten ein'):
+    username = discord.ui.TextInput(
+        style=discord.TextStyle.short,
+        label='Benutzername',
+        required=True,
+        placeholder='dein Benutzername'
+    )
+    
+    password = discord.ui.TextInput(
+        style=discord.TextStyle.short,
+        label='Passwort',
+        required=True,
+        placeholder='dein Passwort'
+    )
+    
+    # Bei Absenden
+    async def on_submit(self, interaction: discord.Interaction):
+        # Codieren von Passwort und Username
+        byte_username = self.username.value.encode('utf-8')
+        byte_password = self.password.value.encode('utf-8')
+        encoded_username = base64.b64encode(byte_username)
+        encoded_password = base64.b64encode(byte_password)
+        # neuen User in Db anlegen
+        db = Database()
+        db.updateUser(interaction.user.name, interaction.user.id, encoded_username, encoded_password)
+        # Embed Antwort
+        await interaction.response.send_message(ephemeral=True, embed=Embeds.getUpdatedDataEmbed())
+        # Logs
+        await DiscordLogs.dataUpdate(interaction.guild.get_channel(Config.user_panel_logs_channel), interaction.user.id) # Discord
+        Logs.dataUpdate(interaction.user.name, interaction.user.id) # Terminal
+        
+    # Bei Error
+    async def on_error(self, interaction: discord.Interaction, error):
+        await interaction.response.send_message(ephemeral=True, embed=Embeds.getLoginErrorEmbed())
+        # Logs
+        await DiscordLogs.dataUpdateError(interaction.guild.get_channel(Config.user_panel_logs_channel), interaction.user.id, error) # Discord
+        Logs.dataUpdateError(interaction.user.name, interaction.user.id, error) # Terminal

@@ -75,7 +75,13 @@ class Logs:
     def userLogout(user_name, user_id):
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;31;40m' + f'"{user_name}" ({user_id}) logged out' + '\x1b[0m')       
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;31;40m' + f'"{user_name}" ({user_id}) logged out' + '\x1b[0m')  
+        
+    # User Data Update
+    def dataUpdate(user_name, user_id):
+        now = datetime.now()
+        formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[3;33;40m' + f'"{user_name}" ({user_id}) updated his data' + '\x1b[0m')      
         
     # Login Error
     def loginError(user_name, user_id, error):
@@ -87,7 +93,13 @@ class Logs:
     def logoutError(user_name, user_id, error):
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
-        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;33;41m' + f'logout error for "{user_name}" ({user_id}):{error}' + '\x1b[0m')     
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;33;41m' + f'logout error for "{user_name}" ({user_id}):{error}' + '\x1b[0m')    
+        
+    # User Data Update Error    
+    def dataUpdateError(user_name, user_id, error):
+        now = datetime.now()
+        formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;33;41m' + f'update data error for "{user_name}" ({user_id}):{error}' + '\x1b[0m')   
         
     # User schon Eingelogt  
     def alreadyLogedIn(user_name, user_id):
@@ -108,6 +120,12 @@ class Logs:
         now = datetime.now()
         formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
         print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;34;40m' + f'created new user for "{user_name}" ({user_id})' + '\x1b[0m')  
+        
+    # User Data Update
+    def updatedUser(user_id, user_name):
+        now = datetime.now()
+        formatted_time = now.strftime('[%d/%m/%Y-%H:%M:%S]')
+        print('\x1b[0;30;40m' + f'{formatted_time} ' + '\x1b[0m' + '\x1b[0;34;40m' + f'updated data for "{user_name}" ({user_id})' + '\x1b[0m') 
         
     # User von DB gelöscht 
     def deletedUser(user_id, user_name):
@@ -195,6 +213,10 @@ class DiscordLogs:
     async def userLogout(channel, user_id):
         await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat sich ausgelogt', Config.logout_log_colour))
         
+    # User Data Update
+    async def dataUpdate(channel, user_id):
+        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Der User **<@{user_id}>** hat seine Nutzerdaten geupdatet', Config.default_log_colour))
+        
     # Login Error
     async def loginError(channel, user_id, error):
         await channel.send(embed=LogEmbeds.getLogsEmbed(f'Fehler beim Login von **<@{user_id}>**. Error: {error}', Config.error_log_colour))
@@ -202,6 +224,10 @@ class DiscordLogs:
     # Logout Error
     async def logoutError(channel, user_id, error):
         await channel.send(embed=LogEmbeds.getLogsEmbed(f'Fehler beim Logout von **<@{user_id}>**. Error: {error}', Config.error_log_colour))
+        
+    # User Data Update Error
+    async def dataUpdateError(channel, user_id, error):
+        await channel.send(embed=LogEmbeds.getLogsEmbed(f'Fehler beim Nutzerdatenupdate von **<@{user_id}>**. Error: {error}', Config.error_log_colour))
         
     # User schon Eingelogt  
     async def alreadyLogedIn(channel, user_id):

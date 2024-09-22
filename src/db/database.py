@@ -19,10 +19,16 @@ class Database:
         Logs.createdUser(discordName, discordId)
     
     # User aus Db löschen
-    def deleteUser(self, discordId, discordName):
-        self.__db.delete("users", f"discordId = {discordId}")
+    def deleteUser(self, discordName, discordId):
+        self.__db.delete('users', f'discordId = {discordId}')
         # Logs nur Terminal
         Logs.deletedUser(discordId, discordName)
+        
+    # User aus Db updaten
+    def updateUser(self, discordName, discordId, username, password):
+        self.__db.update('users', {'username': username, 'password': password}, f'discordId = {discordId}')
+        # Logs nur Terminal
+        Logs.updatedUser(discordId, discordName)
         
     # User mit discordId bekommen
     def getUser(self, discordId):
