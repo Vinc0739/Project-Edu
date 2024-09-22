@@ -27,7 +27,7 @@ class Database:
     # User mit discordId bekommen
     def getUser(self, discordId):
         users = self.__db.select('users')    
-        user = [u for u in users if u[1] == discordId]  
+        user = [u for u in users if u[1] == discordId]
         if user == []:
             return None 
         else:

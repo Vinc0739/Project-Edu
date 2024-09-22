@@ -5,10 +5,10 @@ from dotenv import dotenv_values
 env = dotenv_values('./src/bot/.env')
 
 edupage = Edupage()
-
-def getUserData():
+# edupage.login(env['LOGIN_USERNAME'], env['LOGIN_PASSWORD'], env['SCHOOL_SUBDOMAIN'])
+def getUserData(username, password):
     try:
-        edupage.login(env['LOGIN_USERNAME'], env['LOGIN_PASSWORD'], env['SCHOOL_SUBDOMAIN'])
+        edupage.login(username, password, env['SCHOOL_SUBDOMAIN'])
     except:
-        raise Exception('LOGIN_ERROR: wrong username/password')
+        return Exception('LOGIN_ERROR: wrong username/password')
     return edupage
