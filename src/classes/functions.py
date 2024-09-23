@@ -1,6 +1,7 @@
 import base64
 from ..db.database import Database
 from ..api.api_handler import getUserData
+from ..classes.encryption import EncryptionManager
 from .embeds import Embeds
 from .views import UserPanelView
 
@@ -24,12 +25,11 @@ class Functions:
         db = Database()
         user = db.getUser(user_id)
         # Decodieren
-        byte_username = base64.b64decode(user[2])
-        byte_password = base64.b64decode(user[3])
-        decoded_username = byte_username.decode('utf-8')
-        decoded_password = byte_password.decode('utf-8')
+        encryption_manager = EncryptionManager()
+        decrypted_username = encryption_manager.decrypt(user_id, user[2], user[5])
+        decrypted_password = encryption_manager.decrypt(user_id, user[3], user[5])
         
-        user_edu = getUserData(decoded_username, decoded_password)
+        user_edu = getUserData(decrypted_username, decrypted_password)
         if user_edu == None:
             return None
         else:

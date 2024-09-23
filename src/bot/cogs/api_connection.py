@@ -1,4 +1,5 @@
 import io
+import locale
 from PIL import Image
 import discord
 from discord import app_commands
@@ -11,6 +12,9 @@ from ...classes.logs import Logs, DiscordLogs
 from ...classes.embeds import Embeds
 from ...classes.modals import UpdateDataModal
 from ..bot_config import Config
+
+# Setze die Locale auf Deutsch (de_DE)
+locale.setlocale(locale.LC_TIME, 'de_DE.UTF-8')
 
 def get_available_days():
     days = []

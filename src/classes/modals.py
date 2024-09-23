@@ -27,14 +27,9 @@ class LoginModal(discord.ui.Modal, title='Gib bitte deine EduPage Benutzerdaten 
         overwrites = {guild.default_role: discord.PermissionOverwrite(read_messages=False), guild.me: discord.PermissionOverwrite(read_messages=True), interaction.user: discord.PermissionOverwrite(read_messages=True)}
         channel = await guild.create_text_channel(name=f"🟣︱{interaction.user.name}", overwrites=overwrites, category=await guild.fetch_channel(1283384196253089883))
         await channel.send(embed=Embeds.getChannelCreatedEmbed())
-        # Codieren von Passwort und Username
-        byte_username = self.username.value.encode('utf-8')
-        byte_password = self.password.value.encode('utf-8')
-        encoded_username = base64.b64encode(byte_username)
-        encoded_password = base64.b64encode(byte_password)
         # neuen User in Db anlegen
         db = Database()
-        db.createNewUser(interaction.user.name, interaction.user.id, encoded_username, encoded_password, channel.id)
+        db.createNewUser(interaction.user.name, interaction.user.id, self.username.value, self.password.value, channel.id)
         # Benutzer Rolle geben
         member = guild.get_member(interaction.user.id)
         roles = [discord.utils.get(guild.roles, name=Config.user_role)]
@@ -70,14 +65,9 @@ class UpdateDataModal(discord.ui.Modal, title='Gib bitte deine EduPage Benutzerd
     
     # Bei Absenden
     async def on_submit(self, interaction: discord.Interaction):
-        # Codieren von Passwort und Username
-        byte_username = self.username.value.encode('utf-8')
-        byte_password = self.password.value.encode('utf-8')
-        encoded_username = base64.b64encode(byte_username)
-        encoded_password = base64.b64encode(byte_password)
-        # neuen User in Db anlegen
+        # User Daten in DB Updaten
         db = Database()
-        db.updateUser(interaction.user.name, interaction.user.id, encoded_username, encoded_password)
+        db.updateUser(interaction.user.name, interaction.user.id, self.username.value, self.password.value)
         # Embed Antwort
         await interaction.response.send_message(ephemeral=True, embed=Embeds.getUpdatedData())
         # Logs
