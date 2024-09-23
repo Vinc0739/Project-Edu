@@ -96,11 +96,20 @@ class Embeds:
         embed.set_footer(text='Project Edu made by Vinc#0739', icon_url=Config.logo_url)
         return embed
     
-    def getUpdatedDataEmbed():
+    def getUpdatedData():
         embed = discord.Embed()
         embed.title='Project Edu - Update Data'
         embed.description=f'Du hast deine Nutzerdaten erfolgreich geändert.'
         embed.color=discord.Colour.from_str('0x' + f'{Config.success_embed_colour}')
+        embed.set_footer(text='Project Edu made by Vinc#0739', icon_url=Config.logo_url)
+        return embed
+    
+    def getTimetable(weekday_name, date):
+        embed = discord.Embed()
+        embed.title='Project Edu - Stundenplan'
+        embed.description=f'Das ist dein aktueller Stundenplan für **{weekday_name}**: {date}'
+        embed.set_image(url="attachment://timetable.png")
+        embed.color=discord.Colour.from_str('0x' + f'{Config.default_embed_colour}')
         embed.set_footer(text='Project Edu made by Vinc#0739', icon_url=Config.logo_url)
         return embed
     

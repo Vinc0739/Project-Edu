@@ -34,6 +34,7 @@
 - python-dotenv: Version 1.0.1
 - SQLite4: Version 0.1.1
 - customtkinter: Version 5.2.2
+- matplotlib: Version 3.9.2
 
 ## Websiten
 - [Discord.py Dokumentation](https://discordpy.readthedocs.io/en/stable/#meta)

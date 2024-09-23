@@ -79,7 +79,7 @@ class UpdateDataModal(discord.ui.Modal, title='Gib bitte deine EduPage Benutzerd
         db = Database()
         db.updateUser(interaction.user.name, interaction.user.id, encoded_username, encoded_password)
         # Embed Antwort
-        await interaction.response.send_message(ephemeral=True, embed=Embeds.getUpdatedDataEmbed())
+        await interaction.response.send_message(ephemeral=True, embed=Embeds.getUpdatedData())
         # Logs
         await DiscordLogs.dataUpdate(interaction.guild.get_channel(Config.user_panel_logs_channel), interaction.user.id) # Discord
         Logs.dataUpdate(interaction.user.name, interaction.user.id) # Terminal
