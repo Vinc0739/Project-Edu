@@ -147,7 +147,10 @@ def timetable_to_image(timetable):
             # Wenn die Lektion existiert, erfasse die relevanten Daten
             time_range = f"{lesson.start_time.strftime('%H:%M')} - {lesson.end_time.strftime('%H:%M')}"
             subject = lesson.subject.name
-            teacher = lesson.teachers[0].name
+            if lesson.teachers and len(lesson.teachers) > 0:
+                    teacher = lesson.teachers[0].name
+            else:
+                teacher = "-"
             classroom = lesson.classrooms[0].name
         else:
             # Wenn keine Lektion vorhanden ist, setze leere Werte

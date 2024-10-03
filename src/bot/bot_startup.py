@@ -16,7 +16,8 @@ def start_bot():
 
     # alle cog Extensions laden
     async def load_cogs():
-        # await Logs.botStarting()
+        # Bot Start Log
+        Logs.botStarting()
         for cog_name in os.listdir("./src/bot/cogs"):
             if cog_name.endswith(".py"):
                 Logs.loadingCog(cog_name)
@@ -24,13 +25,13 @@ def start_bot():
                 
     # On Ready Event zum Commands syncen und Aktivität setzten
     @client.event
-    async def on_ready():
+    async def on_ready():       
         # Bot Status ändern
         await client.change_presence(activity=discord.activity.Game(name='Project Edu'))
         
-        # Bot Start Log
-        await DiscordLogs.botStarting(client.get_channel(Config.system_logs_channel)) # Discord
+        # Bot Login Log
         Logs.botLoggedIn(client.user.name) # Terminal
+        await DiscordLogs.botStarting(client.get_channel(Config.system_logs_channel)) # Discord
         
         # User Panel senden
         await Functions.sendUserPanelEmbed(client.get_channel(Config.user_panel_channel))
